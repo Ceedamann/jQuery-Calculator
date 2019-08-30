@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>jQuery Calculator</title>
+  <meta charset="UTF-8">
+  <title>jQuery Calculator</title>
 
-    <!-- Added link to the jQuery Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Added a link to Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- Added a link to our external stylesheet-->
-    <link rel="stylesheet" href="style.css">
+  <!-- Added a link to our external stylesheet-->
+  <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<!-- Jumbotron for Title -->
-<div class="jumbotron">
+  <!-- Jumbotron for Title -->
+  <div class="jumbotron">
     <h1 class="text-center">jQuery Calculator</h1>
     <h3 class="text-center">Perform basic mathematic operations using the power of jQuery!</h3>
-</div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
     <div class="row">
 
@@ -73,50 +75,111 @@
     </div>
   </div>
 
-<script type="text/javascript">
-var firstNumber = 0;
-var secondNumber = 0;
-var operator = "";
-var isOperatorChosen = false;
-var isCalculated = false;
-var result= 0;
+  <script type="text/javascript">
+
+    $(document).ready(function (){
+
+      var firstNumber = 0;
+      var secondNumber = 0;
+      var operator = "";
+      var isOperatorChosen = false;
+      var isCalculated = false;
+      var result = 0;
 
 
-function initializeCalculator(){
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
-  isOperatorChosen = false;
-  isCalculated = false;
+      function initializeCalculator() {
+        firstNumber = "";
+        secondNumber = "";
+        operator = "";
+        isOperatorChosen = false;
+        isCalculated = false;
 
-  $("#first-numver, #second-number, #operator, #result").empty();
-}
-
-
+        $("#first-number, #second-number, #operator, #result").empty();
+      }
 
 
 
 
-$(document).ready(function() {
-  $("#button-1").on("click", function(){
- console.log("click")
-  });
-
-// Your code here...
 
 
-});
- 
-$(document).ready(function() {
+      
+        $(".number").on("click", function () {
+          if (isCalculated) {
+            return false;
+          }
 
-// Your code here...
-  $("#button-1").on("click", function() {
-        console.log("I've been clicked!");
-      });
+          if (isOperatorChosen) {
+            secondNumber += $(this).val();
+            $("#second-number").text(secondNumber);
+          }
+          else {
+            firstNumber += $(this).val();
+            $("#first-number").text(firstNumber);
+          }
+        });
 
-});
+        $(".operator").on("click", function () {
+          if (!firstNumber || isCalculated) {
+            return false;
+          }
+          isOperatorChosen = true;
 
-</script>
+          operator = $(this).val();
+
+          $("#operator").text($(this).text());
+        });
+
+        $(".equal").on("click", function () {
+          if (isCalculated) {
+            return false;
+          }
+          isCalculated = true;
+
+          firstNumber = parseInt(firstNumber);
+          secondNumber = parseInt(secondNumber);
+
+          if (operator === "plus") {
+            result = firstNumber + secondNumber;
+          }
+          else if (operator === "minus") {
+            result = firstNumber - secondNumber;
+          }
+          else if (operator === "times") {
+            result = firstNumber * secondNumber;
+          }
+          else if (operator === "divide") {
+            result = firstNumber / secondNumber;
+          }
+          else if (operator === "power") {
+            result = Math.pow(firstNumber, secondNumber);
+          }
+          $("#result").text(result);
+        });
+
+        $(".clear").on("click", function () {
+          initializeCalculator();
+        });
+
+        initializeCalculator();
+        
+        });
+
+
+
+
+
+
+
+
+
+
+
+      
+
+  
+
+  </script>
 
 </body>
+
 </html>
