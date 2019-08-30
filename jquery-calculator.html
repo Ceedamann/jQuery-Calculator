@@ -74,6 +74,38 @@
   </div>
 
 <script type="text/javascript">
+var firstNumber = 0;
+var secondNumber = 0;
+var operator = "";
+var isOperatorChosen = false;
+var isCalculated = false;
+var result= 0;
+
+
+function initializeCalculator(){
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+  isOperatorChosen = false;
+  isCalculated = false;
+
+  $("#first-numver, #second-number, #operator, #result").empty();
+}
+
+
+
+
+
+
+$(document).ready(function() {
+  $("#button-1").on("click", function(){
+ console.log("click")
+  });
+
+// Your code here...
+
+
+});
  
 $(document).ready(function() {
 
